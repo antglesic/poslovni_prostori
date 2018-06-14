@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="hr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="naslov" content="Početna stranica" />
+        <meta name="kljucne_rijeci" content="projekt, početna" />
+        <meta name="datum_izrade" content="30.05.2018." />
+        <meta name="autor" content="Valentino Poljak" />
+        <link rel="stylesheet" type="text/css" href="../../css/vpoljak_main.css">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#c7c7c7",
+                            "text": "#ffffff"
+                        },
+                        "button": {
+                            "background": "#f96e5b",
+                            "text": "#ffffff"
+                        }
+                    },
+                    "theme": "classic",
+                    "position": "bottom-right",
+                    "content": {
+                        "message": "Ova aplikacija koristi kolačiće kako bi vam osigurala najbolje osobno iskustvo korištenja.",
+                        "dismiss": "Shvaćam!",
+                        "link": "Nauči više",
+                        "href": "http://webdip.barka.foi.hr/2017_projekti/WebDiP2017x119/index.php"
+                    }
+                })
+            });
+        </script>
+
+        <title>Dokumentacija</title>
+    </head>
+    <body>
+        <div id="cssmenu">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="../index.php?odjava=0" class="active">Naslovnica</a>  
+                    </li>
+                    <li>
+                        <a href="lokacije.php">Popis lokacija</a>
+                    </li>
+                    <li>
+                        <a href="oglasi.php">Oglasi</a>
+                    </li>
+                    <li>
+                        <a href="povratnaInformacija.php">Povratna informacija</a>
+                    </li>
+                    <li>
+                        <a href="o_autoru.html">O autoru</a>
+                    </li>
+                    <li>
+                        <a href="dokumentacija.html">Dokumentacija</a>
+                    </li>
+
+                    <li class="last" style="float:right">
+                        <a href="../index.php?odjava=1">Odjava</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <h1>
+            Opis projektnog zadatka:
+        </h1>
+        <div style="width:70%">
+            <p>
+                U ovom projektnom zadatku bilo je potrebno omogućiti korisniku upravljanje poslovnim prostorima. Postoje 4 različita korisnika, a to su: Neregistrirani, registrirani, moderator i admninistrator. Potrebno je kreirati različite lokacije na kojima se nalaze prostori te svaka lokacija mora imat određene dvorane. Također potrebno je bilo staviti oglase na nekoliko stranica. Neregistrirani korisnik vidi popis lokacija, prijavu, registraciju, oglase, te povratnu informaciju i stranice o autoru i dokumentaciju. Registrirani korisnik može slati zahtjeve za blokiranjem oglasa,
+                poslati zahtjev za kreiranjem novog oglasa, kojeg moderator kansije može prihvtiti ili odbiti, vidi popis svojih zahtjeva za oglase te jesu li odbijeni ili prihvaćeni i vidi statistiku klikova za svoje oglase. Moderator može kreirati dvorane za određene lokacije, može otkazati termin i u tom slučaju se mora zakazati novi termin, vidi popise zahtjeva za oglase te ih može prihvatiti ili odbiti, kao što i vidi zahtjeve z ablokiranjem oglasa koje također može prihvatiti ili odbiti. Administrator je zadužen za kreiranje lokacija te dodjeljivanje moderatora lokacijama,
+                vidi statistiku klikova svih oglasa, statistiku plaćenih oglasa, te top listu korisnika koji us najviše platili za oglase.
+            </p>
+        </div>
+        <div id="dokumentacija" style="width:70% ">
+            <h1>ERA: </h1>
+            <a href="../../slike/ERA.png">
+                <img src="../../slike/ERA.png" width="200" height="200" alt="era">
+            </a>
+            <br>
+            <h1>Navigacijski diagram: </h1>
+            <a href="../../slike/Navigacijski.jpg">
+                <img src="../../slike/Navigacijski.jpg" width="200" height="200" alt="navigacijski">
+            </a>
+            
+            
+            <h1>Popis i opisivanje skripata</h1>
+            <ol>
+                <li>Neregistrirani korisnik
+                    <br>
+                    <ul>
+                        <li>
+                            Aktivacija.php – skripta u kojoj se korisnik aktivira u aplikaciju, odnosno njegov status postaje registrirani korisnik pomoću aktivacijskog koda kojega je prethodno dobio na mail
+                        </li>
+                        <li>
+                            Banneri.php – skripta u kojoj se dohvaćaju svi aktivni oglasi iz baze i zatim ispisuju
+                        </li>
+                        <li>
+                            Baza.class.php – skripta za spajanje na bazu podataka 
+                        </li>
+                        <li>
+                            dvorane.php – skripta u kojoj se iz baze dohvaćaju sve dvorane s određene lokacije koje su slobodne za rezervaciju i ispisuju se u obliku tablice
+                        </li>
+                        <li>
+                            index.php – skripta koja je zapravo početna stranica za neregistriranog korisnika. Kada korisnik prvi puta posjeti stranicu kreira se kolačić i ispisuje se poruka da je potrebno koristiti kolačiće
+                        </li>
+                        <li>
+                            u ovoj skripti se najprije sa isset provjerava je li u url-u definiran id oglasa te ako je sa get metodom se dohvaća ta vrijednost i sprema u varijablu. Zatim se sql upitom dohvaća taj oglas iz baze podataka. Također u toj skripti se i povećava broj klikova na oglas kad se na njega pritisne
+                        </li>
+                        <li>
+                            korsnici.php – skripta u koju se pomoću sql upita dohvaćaju svi korisnici iz baze podataka
+                        </li>
+                        <li>
+                            lokacije.php – u ovoj se skripti iz baze podataka dohvaćaju sve lokacije i spremaju se u bazu podataka
+                        </li>
+                        <li>
+                            oglasi.php – skripta u kojoj se dohvaćaju podaci o oglasima iz baze podataka i prikazuju se u obliku tablice
+                        </li>
+                        <li>
+                            povratnaInformacija.php – u ovoj skripti se prvo provjerava je li pritisnut gumb za slanje podataka te ako je, vrijednosti koje su unesene se spremaju u varijable i diže se zastavica. Zatim dok je zastavica dignuta dohvaća se prijava za dvoranu koja ima sigurnosni kod kojega je korisnik u formi unio i onda ako postoji takva prijava, za tu prijavu se sprema povratna informacija koju je korisnik unio,  oslobađa se dvorana, odnosno postavlja joj se da više nije zauzeta i u dnevnik se zapisuje akcija koja se dogodila
+                        </li>
+                        <li>
+                            prijava.php – U ovoj skripti se najprije provjerava je li pritisnut gumb te ako je pritisnut vrijednosti unesene u polja se spremaju u varijable i diže se zastavica. Kad je zastavica dignuta pomoću sql upita se iz baze dohvaća korisnik koji ima korisničko ime i lozinku jednaku upisanoj te mora imati i broj pokusaja prijave manji od 3. Dohvaća se iz upita ulogaid koja može biti 1, 2 ili 3 ovisno o tome je li korisnik registrirani korisnik, moderator ili administrator. Kreira se za prijavljenog korisnika sesija i kolačić te se akcija zapisuje u dnevnik. Ako je uneseno krivo korisničko ime ili lozinka, korisniku se u bazi podataka povećava broj neuspjelih pokušaja i kada mu je broj neuspjelih pokušaja veći od 3 ne može se prijaviti
+                        </li>
+                        <li>
+                            prijavaDvorane.php – U ovoj se skripti najprije provjerava je li u url-u definiran id dvorane i ako je definiran sprema se u varijablu i diže se zastavica. Kad je zastavica dignuta pomoću sql upita se dohvaća dvorana koja ima taj id i zatim se prolazi kroz rezultat upita i u varijable se sprema ime dvorane i vrsta korištenja. Klikom na gumb prijavi se prijavljuje dvorana.
+                        </li>
+                        <li>
+                            registracija.php – U ovoj skripti se provjerava je li pritisnut gumb za registraciju te ako je pritisnut vrijednosti se spremaju u varijablu i diže se glavna zastavica. Ako je zastavica dignuta vrše se provjere je li koje polje ostalo prazno, postoje li nedozvoljeni znakovi, je li email u ispravnom formatu, jesu li lozinke jednake te postoji li korisničko ime ili email već u bazi. Ako je bilo što od toga istina dižu se određene zastavice i javlja se problem kod registriranja. Ako su sve provjere prošle, odnosno sve zastavice su ostale na 0 tada se korisnik uspješno registrirao i upisuje se u bazu podataka, akcija se upisuje u dnevnik i korisniku na mail stiže poruka sa aktivacijskim kodom 
+                        </li>
+                        <li>
+                            rezervacija.php – U ovoj se skripti provjerava nalazi li se u url-u email i dvorana i ako se nalaze spremaju se u varijable. Zatim se pomoću upita u tablicu upisuje prijavljena dvorana i akija u dnevnik te se mail sa sigurnosnim kodom šalje korisniku koji je rezervirao.
+                        </li>
+                         <li>
+                            sesija.class.php – klasa za kreiranje i rad sa sesijom
+                        </li>
+                         <li>
+                            zaboravljenaLozinka.php – U ovoj se skripti provjerava je li pritisnut gumb za zaboravljenu lozinku, te ako je pritisnut sprema se korisničko ime u varijablu i diže se zastavica. Ako je zastavica dignuta iz baze podataka se uzima korisnik s tim korisničkim imenom i njemu se šalje nova kriptirana lozinka i u bazi podatak mu se lozinka ažurira na tu kriptiranu lozinku koja mu je poslana na mail. On zatim može promjeniti lozinku
+                        </li>
+                    </ul>
+                    <br>
+                </li>
+                <li>Registrirani korisnik
+                    <br>
+                    <ul>
+                        <li>
+                            blokiranjeOglasa.php – U ovoj se skripti prvo provjerava je li postavljena sesija za registriranog korisnika. Zatim se provjerava nalazi li se idOglas u url-u i ako se nalazi sprema s u varijablu i diže se zastavica. Nakon toga se pomoću sql upita dohvaća taj oglas iz baze i njegov se naziv sprema u varijablu.  Ako je pritisnut gumb za slanje zahtjeva za blokiranjem oglasa zahtjev je poslan sa šifrom oglasa i razlogom zašto ga treba blokirati
+                        </li>
+                        <li>
+                            index.php – početna stranica registriranog korisnika
+                        </li>
+                        <li>
+                            oglasiBlok.php – U ovoj se skripti ažurira status oglasa u nekativan pomoću sql upita, te se akcija zapisuje u dnevnik i zahtjev u tablicu zahtjev
+                        </li>
+                        <li>
+                            oglasi.php - skripta u kojoj se dohvaćaju podaci o oglasima iz baze podataka i prikazuju se u obliku tablice
+                        </li>
+                        <li>
+                            vasiOglasi.php – Skripta u kojoj se pomoću sql upita iz sesije dohvaća id korisnika koji je prijavljen te se preko tog id-a prikazuju u tablici svi njegovi oglasi
+                        </li>
+                        <li>
+                            vrsteOglasa.php – Skripta u kojoj se pomoću sql upita iz baze dohvaćaju sve vrste oglasa i prikazuju u tablici
+                        </li>
+                        <li>
+                            zahtjevOglasa.php – U ovoj se skripti prvo provjerava nalazi li se idVrste u url-u te ako se nalazi sprema se u varijablu i diže se zastavica. Zatim se pomoću POST metode spremaju vrijednosti u varijablu i diže se zastavica2. Kad je zastavica2 dignuta uploada se file u folder gdje mu postavljena putanja i uzima se naziv file-a koji se kasnije sprema u bazu. Zatim se podaci upisuju u bazu podataka sql insertom u tablice zahtjev i stranica i nakon toga u slanje zahtjeva
+                        </li>
+                        <li>
+                            zahtjevi.php – u ovoj skripti se dohvaćaju podaci o zahtjevima za oglase iz baze i prikazuju u obliku tablice
+                        </li>
+                    </ul>
+                    <br>
+                </li>
+                <li>Moderator
+                    <br>
+                    <ul>
+                        <li>
+                            blokiranjeZahtjeva.php – Ova skripta služi za prihvaćanje ili odbijanje zahtjeva za blokiranjem oglasa te se ukoliko prihvatimo zahtjev, status oglasa ažurira u bazi i akcija se upisuje u dnevnik, a ako odbijemo oglas status oglasa postaje aktivan i također se upisuje akcija u dnevnik
+                        </li>
+                        <li>
+                            index.php – početna stranica moderatora
+                        </li>
+                        <li>
+                            novaDvorana.php – u ovoj se skripti dodaje nova dvorana određenoj lokaciji. Kada upišemo vrijednosti u polja, s POST metodom ih dohvatimo i smjestimo u varijable te zatim pomoću sql upita upisujemo u tablicu novu dvoranu i u dnevnik akciju
+                        </li>
+                        <li>
+                           novaVrsta.php – Ova skripta služi za dodavanje nove vrste oglasa. Najprije pomoću POST metode dohvatimo sve vrijednosti u varijable i podignemo zastavicu. Zatim kada je zastavica podignuta pomoću sql upita dodajemo novu vrstu oglasa u bazu
+                        </li>
+                        <li>
+                            noviTermin.php – U ovoj skripti se dodaje novi termin za određenu dvoranu ukoliko se prethodni termin iz nekog razloga morao otkazati. Dakle, ako otkazujemo termin, automatski moramo odabrati novi termin i zatim se taj termin zapisuje u tablicu i akcija u dnevnik
+                        </li>
+                        <li>
+                           obradaZahtjeva.php – u ovoj skripti se odbijaju ili prihvaćaju zahtjevi za kreiranjem oglasa. Prvo provjerimo je li postavljen id oglasa i operacija u url-u pomoću GET metode, a zatim ako jesu smjestimo ih u varijable. Ako je zahtjev odbijen, ažuriramo određeni zahtjev u tablici, odnosno mijenjamo mu status u odbijen i tu aktivnost zapisujemo u dnevnik. Ako je prihvaćen zahtjev ažuriramo zahtjev u tablici kao prihvaćen i zapisujemo akciju u dnevnik te dodajemo novi oglas u tablicu oglas i oglas bi nam se automatski trebao vrtjeti zajedno s ostalima prihvaćenim oglasima
+                        </li>
+                        <li>
+                            otkazTermina.php – skripta koja služi za otkazivanje termina
+                        </li>
+                        <li>
+                            otkazivanje.php - 
+                        </li>
+                        <li>
+                            termini.php – skripta koja prikazuje termine koje je korisnik prijavio i prikazuje ih u tablici
+                        </li>
+                        <li>
+                            zahtjevi.php – skripta u kojoj se iz baze dohvaćaju svi zahtjevi za kreiranjem oglasa od korisnika i ispisuju se u tablicu
+                        </li>
+                        <li>
+                            zahtjeviBlok.php – skripta koja prikazuje zahtjeve za blokiranjem oglasa koji su dohvaćeni iz baze podataka te ih je moguće odbiti ili prihvatiti i prikazani su kao timeline, odnosno vremenska crta
+                        </li>
+                    </ul>
+                    <br>
+                </li> 
+                <li>Administrator
+                    <br>
+                    <ul>
+                        <li>
+                            dnevnik.php – skripta u koju se upisuju sve aktivnosti korisnika u bazu te se iz baze dohvaćaju podaci i prikazuju u tablici
+                        </li>
+                        <li>
+                            index.php – skripta s početnom stranicom, odnosno naslovnica 
+                        </li>
+                        <li>
+                            indexAdmin.php – skripta koja sadrži početnu stranicu administratora, s pravima koja samo administrator ima
+                        </li>
+                        <li>
+                            korisnici.php – u ovoj skripti su dohvaćeno podaci iz baze o svim korisnicima čiji id nije jednak id u sesiji i prikazani su u obliku tablice te ih administrator može otključati ili zaključati
+                        </li>
+                        <li>
+                            moderatori.php – u ovoj skripti su dohvaćeno podaci iz baze o svim korisnicima te su ti korisnici prikazani u tablici i administrator im može dati ili oduzeti prava moderatora
+                        </li>
+                        <li>
+                            novaLokacija.php – skripta koja služi za dodavanje nove lokacije i upisivanje te lokacije u bazu podataka i upis akcije u dnevnik
+                        </li>
+                        <li>
+                            obradaKorisnika.php – skripta u kojoj se obrađuju korisnici, kada administrator pritisne otključavanje ili zaključavanje korisnika, ovisno o operaciji koju je administrator pritisnuo ažurira se korisnik u bazi i u tablici
+                        </li>
+                        <li>
+                            obradaModeratora.php - skripta u kojoj se obrađuju moderatori, kada administrator pritisne davanje prava moderatora korisniku ili oduzimanje prava moderatora korisnika, ovisno o operaciji koju je administrator pritisnuo ažurira se uloga korisnika u bazi i u tablici
+                        </li>
+                        <li>
+                            statistikaKlikova.php – skripta koja broji kolika je statistika klikova na oglase te ispisuje te podatke u tablicu nakon što su dohvaćeni preko sql upita
+                        </li>
+                        <li>
+                            statistikaPlacenih.php – skripta koja u obliku tablice prikazuje koliko je za koju vrstu oglasa ukupno plaćeno 
+                        </li>
+                        <li>
+                            teme.php – skripta pomoću koje administrator može mijenjati između svjetle i tamne teme
+                        </li>
+                        <li>
+                            topLista.php – skripta koja u obliku tablice prikazuje korisnike i koliko su ukupno platili za oglase
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        
+        <h1>Mapa mjesta: </h1>
+            <dl>
+                <dt>Početna stranica: </dt>
+                <dd>Popis lokacija</dd><dd>Prijava</dd><dd>Registracija</dd><dd>Oglasi</dd><dd>Povratna informacija</dd><dd>O autoru</dd><dd>Dokumentacija</dd>
+                <dt>Registrirani korisnik: </dt>
+                <dd>Blokiranje oglasa</dd><dd>Vrste oglasa</dd><dd>Vaši zahtjevi</dd><dd>Vaši oglasi</dd>
+                <dt>Moderator: </dt>
+                <dd>Nove dvorane</dd><dd>Termini</dd><dd>Zahtjevi za oglas</dd><dd>Zahtjevi za blok</dd><dd>Nova vrsta oglasa</dd><dd>Korisnički pogled</dd>
+                <dt>Administrator: </dt>
+                <dd>Nova lokacija</dd><dd>Statistika klikova</dd><dd>Statistika plaćenih</dd><dd>Top lista</dd><dd>Admin</dd><dd>User</dd><dd>Mod</dd>
+            </dl>
+        <h1>Korištene tehnologije i alati</h1>
+        <p>
+            Tehnologije koje su korištene u ovom projektu su: html, php, javascript, css i mysql. Alati korišteni su: Netbeans, MySql Workbench, Draw.io, phpMyAdmin.<br>
+            Html je kratica od HyperText Markup Language i to je prezentacijski jezik za izradu web stranica.<br>
+            CSS je kratica od Cascading StylSheets, to je stilski jezik za za opis prezentacije dokumenta napisanog pomoću HTML-a.<br>
+            Javascript je skriptni programski jezik, koji se izvršava u web pregledniku na strani korisnika. <br>
+            MySQL je besplatan, open source sustav za upravljanje bazom podataka. <br>
+            Netbeans jedan je od najkvalitetnijih open source razvojnih IDE-a na tržištu, a pokriva sve: Javu, PHP, C, C++, Ruby, HTML, CSS, JavaScript. Što je najbolje, potpuno je besplatan na svim platformama od Windowsa, do Linuxa, Solarisa i OSX-a. <br>
+            MySql Workbench je grafički alat za dizajniranje baza podataka koji integrira SQL razvoj, administraciju, dizajn i održavanje u jedno zajedničko sučelje za MySQL baze podataka. <br>
+            Draw.io je besplatan online alat za crtanje raznih dijagrama. <br>
+            phpMyAdmin je besplatan alat pisan u PHP-u, a služi za upravljanje i administraciju MySQL-a preko World Wide Web-a. Uz pomoć njega možete izvršavati mnoge MySQL operacije putem korisničkog sučelja izravno u Internet pregledniku.
+        </p>
+        
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+        </script>
+
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </body>
+</html>
